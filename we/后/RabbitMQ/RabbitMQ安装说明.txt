@@ -1,0 +1,1 @@
+先安装erlang开发包,再配置erlang环境。然后在安装RabbitMQ,就可以通过springboot整合RabbitMQ了

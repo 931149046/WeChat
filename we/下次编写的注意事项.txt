@@ -1,0 +1,29 @@
+前端的注意:
+	1.由于axios发送异步请求在main.js中配置了,
+	axios.defaults.baseURL = 'http://172.16.11.230:7000' //配置axios的访问地址;下次要更改一下
+
+	2.注册组件(Register.vue)中上传图片用的是element-ui中的组件;到时候要更改下上传的后台路径
+	<el-upload name="file" action="http://172.16.11.230:7000/user/FileImage"
+	 list-type="picture-card">
+              <i class="el-icon-plus"></i>
+         </el-upload>。就是这个组件,action是后台的上传地址
+
+	3.更新头像地址的组件Upload.vue中也有注意事项2中的上传组件,要进行更改下后台的上传路径
+
+	4.二维码名片组件(twocode)中,可以进行扫码添加好友的(只做了扫码后拿到用户的id去添加好友界面,没法进行添加。网上的答案是js没法调用摄像头进行扫描,我也没有过多研究调用摄像头进行扫码)。到时候要进行更改二维码地址的时候改data数据区中的变量名为value的就可以了。
+
+	5.页面的大体的流程有登录、注册、添加好友、删除好友、聊天、发朋友圈、还有其他细化的功能是围绕这这个主要的功能的。
+	
+	6.高德地图定位要注意下,进行打包后在电脑端浏览器测试定位如果用的模拟器的话定位没法用;不使用模拟器就能定位,还有手机端的浏览器也可以定位。就是在手机端在qq中或者微信中打开定位的页面的话也无法定位
+	
+
+后台的注意:
+	1.要把前端上传图片过来进行处理的图片保存地址要改一下、改的地方有UserController中的FileImage方法、service包下的imp包下的名为CircleServiceImp中的FileImage方法、还有个地方service包下的imp包下的名为UserService中的updateImage方法。还有改下application.yml中的数据库连接地址
+JDK使用的是12的,打包后的jar包可以直接cmd运行jar包
+
+	数据库注意使用的是8.0版本的mysql数据库
+
+nginx注意下:
+	头像上传的图片保存在nginx进行映射的磁盘文件夹中的,所以到时候要把nginx配置了就能进行获取到头像了
+userImage这个文件夹为上传头像的文件夹
+	

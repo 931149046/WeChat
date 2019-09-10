@@ -1,0 +1,86 @@
+<template>
+  <div class="nfid">
+    <mt-header title="" fixed>
+      <router-link to="" slot="left">
+        <img src="../../../static/image/左箭头.png" width="18" height="18" onclick="window.history.go(-1)">
+        <span style="color: #282828; display: block;margin-top: -21px;
+          margin-left: 32px;font-size: 17px;font-weight: 500;letter-spacing: 1px;">新的朋友</span>
+      </router-link>
+    </mt-header>
+
+    <div class="ma">
+      <el-row style="width: 100%; height: 40px;display: flex;align-items: center;background: white;margin-top: 1px;"
+              v-for="(rep,index) in replyinfoArr" :key="index">
+        <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" style="display: flex;justify-content: center;">
+          <img :src="rep.informImage" width="30" height="30">
+        </el-col>
+        <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+          <el-row>
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" style="margin-left:10px;">
+              <span style="text-align: center;font-size: 14px;">{{rep.fName}}</span><br/>
+              <el-row>
+                <el-col>
+                  <span style="text-align: center;font-size: 12px;color: #888888;">{{rep.content}}</span><br/>
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4" style="display: flex;justify-content: center;">
+          <span style="font-size: 12px;">{{rep.state}}</span>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
+</template>
+
+<script>
+  import axios from 'axios'
+  export default {
+    data () {  //组件的数据区
+      return {
+        replyinfoArr: [],
+      }
+    },
+    methods: {  //方法区
+
+    },
+    components: {  //子组件进行标签映射
+
+    },
+    mounted () {
+      console.log('获取的id', this.$route.params.id)
+      axios.post(`/inform/findByJId/` + this.$route.params.id).then(res => {
+        this.replyinfoArr = res.data
+      })
+    }
+  }
+</script>
+
+<style scoped>
+  .mint-header {
+    background-color: #ededed;
+    height: 58px;
+  }
+
+  body {
+    background: #ededed;
+  }
+
+  .ma {
+    margin-top: 58px;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .nfid {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: #ededed;
+  }
+</style>

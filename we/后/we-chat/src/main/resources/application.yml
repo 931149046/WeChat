@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #serverTimezone=UTC&useSSL=false意思是使用东八区的时区,不使用SSL证书
+    url: jdbc:mysql://127.0.0.1:3306/we_chat?serverTimezone=UTC&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql:
+      true
+server:
+  port: 7000
